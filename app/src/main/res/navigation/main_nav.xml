@@ -9,5 +9,20 @@
         android:id="@+id/homeFragment"
         tools:layout="@layout/home_fragment"
         android:name="com.ilustris.weether.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            android:id="@+id/action_homeFragment_to_locationDetailsFragment"
+            app:destination="@id/locationDetailsFragment">
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailsFragment"
+        tools:layout="@layout/location_weather_fragment"
+        android:name="com.ilustris.weether.ui.location.LocationDetailsFragment"
+        android:label="LocationDetailsFragment" >
+        <argument app:argType="com.ilustris.weether.data.CityData[]" android:name="cities"/>
+        <argument app:argType="integer" android:name="position"/>
+    </fragment>
 </navigation>

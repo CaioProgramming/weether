@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="15dp"
     android:layout_margin="10dp"
-    app:cardElevation="1dp"
+    app:cardElevation="0dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/weather_icon"
+            app:lottie_autoPlay="false"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:scaleType="center"
             android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toBottomOf="@+id/temp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,11 +1,21 @@
 package com.ilustris.weether.data
 
-data class CityData(val name: String, val country: String, val weatherData: WeatherData)
+import android.os.Parcelable
+import com.ilustris.weether.data.mapper.WeatherMapper
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
+data class CityData(val name: String, val country: String, val weatherData: WeatherData) : Parcelable
+
+@Parcelize
 data class WeatherData(
     val title: String,
     val description: String,
     val temperature: Int,
     val temperatureFeels: Int,
-    val icon: String
-)
+    val maxTemperature: Int,
+    val minTemperature: Int,
+    val windSpeed: Double,
+    val humidity: Int,
+    val weatherType: WeatherMapper.WeatherTypes?
+) : Parcelable

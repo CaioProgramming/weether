@@ -18,7 +18,7 @@ interface OpenWeatherApi {
     @GET("weather")
    suspend fun queryLocationWeather(
         @Query("lat") latidude: Double,
-        @Query("long") longitude: Double,
+        @Query("lon") longitude: Double,
         @Query("units") unit : String = "metric",
         @Query("appid") key: String = BuildConfig.OPENWEATHER_KEY,
         ) : OpenWeatherResponse

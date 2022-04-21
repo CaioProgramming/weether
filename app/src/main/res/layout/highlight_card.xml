@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="15dp"
     android:layout_margin="10dp"
-    app:cardBackgroundColor="@color/material_grey200"
-    tools:cardBackgroundColor="@color/material_blue500"
+    app:cardBackgroundColor="@color/material_blue500"
     app:cardElevation="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,12 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/weather_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/ic_launcher_foreground"
-            android:scaleType="center"
+            tools:src="@drawable/ic_launcher_foreground"
+            app:lottie_autoPlay="true"
+            app:lottie_repeatMode="reverse"
+            app:lottie_loop="true"
             android:layout_width="64dp"
             android:layout_height="64dp"/>
 
@@ -30,7 +31,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/alata"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-            app:layout_constraintEnd_toStartOf="@+id/temp_feels"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/weather_icon"
@@ -62,7 +62,7 @@
             android:id="@+id/temp"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center"
+            android:gravity="end"
             android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
             android:textColor="?android:textColorPrimary"
             android:textStyle="bold"
@@ -71,15 +71,19 @@
             app:layout_constraintStart_toStartOf="@+id/temp_feels"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="40°" />
+
         <TextView
             android:id="@+id/temp_feels"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/temp"
-            tools:text="Feels like 30°"
-            android:textColor="?android:textColorPrimary"
+            android:layout_width="0dp"
+            android:gravity="end"
+            android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.865"
+            app:layout_constraintStart_toEndOf="@id/weather_location"
+            app:layout_constraintTop_toBottomOf="@id/temp"
+            tools:text="Feels like 30°" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

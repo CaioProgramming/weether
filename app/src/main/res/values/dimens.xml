@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_default_10dp">10dp</dimen>
+    <dimen name="radius_default_10dp">10dp</dimen>
+    <dimen name="padding_small_8dp">8dp</dimen>
+</resources>

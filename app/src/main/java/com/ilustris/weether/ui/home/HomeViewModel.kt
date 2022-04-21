@@ -12,7 +12,6 @@ import com.ilustris.weether.data.CityData
 import com.ilustris.weether.domain.usecase.WeatherUseCase
 import com.ilustris.weether.network.Result
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application, private val useCase: WeatherUseCase) :
@@ -21,21 +20,12 @@ class HomeViewModel(application: Application, private val useCase: WeatherUseCas
     val homeState = MutableLiveData<HomeState>()
 
     sealed class HomeState {
-        data class CityWeatherRetrieved(val cityData: CityData) : HomeState()
+        data class LocalWeatherRetrieved(val cityData: CityData): HomeState()
+        data class CitiesWeatherRetrieved(val cities: List<CityData>) : HomeState()
         data class FetchError(val message: String) : HomeState()
+        data class CityQuerryError(val message: String): HomeState()
         object RequestLocationPermission : HomeState()
         object RequestActualLocation : HomeState()
-    }
-
-    fun queryCityWeather(cityName: String) {
-        Log.i(javaClass.simpleName, "querying: $cityName")
-
-        viewModelScope.launch(Dispatchers.IO) {
-            when (val request = useCase.fetchCityWeather(cityName)) {
-                is Result.Error -> postError(request.exception.message)
-                is Result.Success -> homeState.postValue(HomeState.CityWeatherRetrieved(request.data))
-            }
-        }
     }
 
     fun fetchCities() {
@@ -44,10 +34,18 @@ class HomeViewModel(application: Application, private val useCase: WeatherUseCas
             when (request) {
                 is Result.Error -> postError(request.exception.message)
                 is Result.Success -> {
-                    Log.i(javaClass.simpleName, "fetchCities: ${request.data.size} cities loaded")
+                    val cities = ArrayList<CityData>()
                     request.data.forEach {
-                        queryCityWeather(it)
+                        when(val cityWeather = useCase.fetchCityWeather(it)) {
+                            is Result.Error -> {
+                                homeState.postValue(HomeState.CityQuerryError("Error fetching $it weather"))
+                            }
+                            is Result.Success -> {
+                                cities.add(cityWeather.data)
+                            }
+                        }
                     }
+                    homeState.postValue(HomeState.CitiesWeatherRetrieved(cities.sortedBy { it.name }))
                 }
             }
         }
@@ -65,7 +63,7 @@ class HomeViewModel(application: Application, private val useCase: WeatherUseCas
         viewModelScope.launch(Dispatchers.IO) {
             when (val request = useCase.fetchLocationWeather(latitude, longitude)) {
                 is Result.Error -> postError(request.exception.message)
-                is Result.Success -> homeState.postValue(HomeState.CityWeatherRetrieved(request.data))
+                is Result.Success -> homeState.postValue(HomeState.LocalWeatherRetrieved(request.data))
             }
         }
     }
