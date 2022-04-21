@@ -5,7 +5,7 @@
     app:cardCornerRadius="15dp"
     android:layout_margin="10dp"
     app:cardBackgroundColor="@color/material_grey200"
-    tools:cardBackgroundColor="@color/material_bluegrey500"
+    tools:cardBackgroundColor="@color/material_blue500"
     app:cardElevation="0dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -25,6 +25,17 @@
             android:layout_height="64dp"/>
 
         <TextView
+            android:id="@+id/weather_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+            app:layout_constraintEnd_toStartOf="@+id/temp_feels"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weather_icon"
+            tools:text="São Paulo, BR" />
+        <TextView
             android:id="@+id/weather_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +44,7 @@
             app:layout_constraintEnd_toStartOf="@+id/temp_feels"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weather_icon"
+            app:layout_constraintTop_toBottomOf="@id/weather_location"
             tools:text="Heavy rain" />
 
         <TextView

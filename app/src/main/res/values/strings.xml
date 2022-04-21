@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">weether</string>
+    <string name="open_weatherapi">0eecc1e81fadaf617190090b93109eac</string>
 </resources>

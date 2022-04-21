@@ -13,6 +13,7 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+        buildConfigField('String', 'OPENWEATHER_KEY', '"0eecc1e81fadaf617190090b93109eac"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,6 +52,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.0-beta01'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"

@@ -1,7 +1,8 @@
-package com.ilustris.weether
+package com.ilustris.weether.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ilustris.weether.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
