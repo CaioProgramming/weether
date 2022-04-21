@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.os.bundleOf
+import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest.PRIORITY_LOW_POWER
@@ -30,7 +33,7 @@ class HomeFragment : Fragment() {
 
     private var homeBinding: HomeFragmentBinding? = null
     private val homeViewModel: HomeViewModel by viewModel()
-    private val weatherAdapter = WeatherRecyclerviewAdapter(onSelectCity = { city, index ->
+    private val weatherAdapter = WeatherRecyclerviewAdapter(onSelectCity = { index ->
         selectCity(index)
     })
     private lateinit var locationPermissionRequest: ActivityResultLauncher<String>
@@ -104,7 +107,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun showError(message: String) {
-        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED).show()
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).setBackgroundTint(Color.RED)
+            .show()
     }
 
     private fun updateCities(cityData: CityData) {

@@ -6,8 +6,6 @@ import com.ilustris.weether.data.WeatherData
 import com.ilustris.weether.data.dto.response.openweather.Main
 import com.ilustris.weether.data.dto.response.openweather.OpenWeatherResponse
 import com.ilustris.weether.data.dto.response.openweather.Weather
-import com.ilustris.weether.utils.OPEN_WEATHER_ICONS_SUFIX
-import com.ilustris.weether.utils.OPEN_WEATHER_ICONS_URL
 
 class WeatherMapper {
 

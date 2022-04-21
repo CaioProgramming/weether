@@ -1,6 +1,5 @@
 package com.ilustris.weether.ui.home.adapter
 
-import android.graphics.drawable.Drawable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
 import com.ilustris.weether.databinding.HighlightCardBinding
@@ -21,7 +15,7 @@ import com.ilustris.weether.databinding.WeatherCardBinding
 private const val HIGHLIGHTVIEW = 0
 private const val SECONDARYVIEW = 1
 
-class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayList(),val onSelectCity: (CityData, Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayList(),val onSelectCity: (Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
@@ -76,12 +70,14 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
                 val city = citiesWeather[bindingAdapterPosition]
                 weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}")
                 temp.text = "${city.weatherData.temperature}°C"
+                weatherDescription.text = city.weatherData.description
                 city.weatherData.weatherType?.let {
                     val textColor = ContextCompat.getColor(itemView.context, it.textColor)
                     val backColor = ContextCompat.getColor(itemView.context, it.backColor)
                     weatherIcon.setAnimationFromUrl(it.animationUrl)
                     temp.setTextColor(textColor)
                     weatherLocation.setTextColor(textColor)
+                    weatherDescription.setTextColor(textColor)
                     root.setCardBackgroundColor(backColor)
                 }
             }
@@ -109,7 +105,7 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-           onSelectCity(citiesWeather[position], position)
+           onSelectCity(position)
         }
         val slideIn = AnimationUtils.loadAnimation(holder.itemView.context, org.koin.android.R.anim.abc_slide_in_bottom)
         holder.itemView.startAnimation(slideIn)

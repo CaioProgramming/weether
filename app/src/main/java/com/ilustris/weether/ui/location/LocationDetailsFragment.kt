@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import androidx.viewpager2.widget.ViewPager2
-import com.ilustris.weether.data.CityData
 import com.ilustris.weether.databinding.LocationWeatherFragmentBinding
 import com.ilustris.weether.ui.location.adapter.LocationPagerAdapter
 
@@ -27,8 +25,11 @@ class LocationDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        locationWeatherFragmentBinding.locationsPager.adapter = LocationPagerAdapter(args.cities.toList())
-        locationWeatherFragmentBinding.locationsPager.setCurrentItem(args.position, true)
+        locationWeatherFragmentBinding.locationsPager.run {
+           adapter = LocationPagerAdapter(args.cities.toList())
+            setCurrentItem(args.position, true)
+        }
+
     }
 
 
