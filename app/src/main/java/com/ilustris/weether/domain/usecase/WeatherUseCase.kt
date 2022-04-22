@@ -10,5 +10,4 @@ interface WeatherUseCase {
    suspend fun fetchCityWeather(city: String) : Result<Exception, CityData>
    suspend fun fetchLocationWeather(latitude: Double, longitude: Double) : Result<Exception, CityData>
    suspend fun fetchCities() : Result<Exception, List<String>>
-
 }

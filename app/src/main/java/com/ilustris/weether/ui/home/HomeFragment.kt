@@ -92,7 +92,7 @@ class HomeFragment : Fragment() {
                     homeViewModel.fetchCities()
                 }
                 is HomeViewModel.HomeState.CitiesWeatherRetrieved -> addCities(it.cities)
-                is HomeViewModel.HomeState.CityQuerryError -> {
+                is HomeViewModel.HomeState.CityQueryError -> {
                     Snackbar.make(requireView(), it.message, Snackbar.LENGTH_LONG).show()
                 }
             }

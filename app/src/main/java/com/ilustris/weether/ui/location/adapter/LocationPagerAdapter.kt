@@ -12,7 +12,6 @@ import com.ilustris.weether.databinding.LocationPageBinding
 class LocationPagerAdapter(val cities: List<CityData>) :
     RecyclerView.Adapter<LocationPagerAdapter.LocationPageViewHolder>() {
 
-
     inner class LocationPageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
             LocationPageBinding.bind(itemView).run {

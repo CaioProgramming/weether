@@ -57,166 +57,139 @@
         app:layout_constraintTop_toBottomOf="@id/weather_current_temp"
         tools:text="It's sunny" />
 
-
     <LinearLayout
+        android:padding="@dimen/padding_small_8dp"
         android:background="@drawable/rounded_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/margin_default_10dp"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_default_10dp"
+            android:gravity="center"
+            android:id="@+id/weather_max_temp_layout"
+            app:layout_constraintStart_toStartOf="parent"
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:paddingVertical="@dimen/padding_small_8dp"
-                android:gravity="center"
-                android:layout_gravity="center"
+            <TextView
+                android:text="@string/max_card_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_marginHorizontal="@dimen/margin_default_10dp"
-                    android:gravity="center"
-                    android:id="@+id/weather_max_temp_layout"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Max"
-
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:id="@+id/weather_max_temp"
-                        tools:text="23°"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_marginVertical="@dimen/margin_default_10dp"
-                    android:background="@color/material_grey100"
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"/>
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:layout_marginHorizontal="@dimen/margin_default_10dp"
-                    android:id="@+id/weather_min_temp_layout"
-                    app:layout_constraintStart_toEndOf="@id/weather_max_temp_layout"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Min"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:id="@+id/weather_min_temp"
-                        tools:text="23°"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_marginVertical="@dimen/margin_default_10dp"
-                    android:background="@color/material_grey100"
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"/>
-
-                <LinearLayout
-                    android:layout_marginHorizontal="@dimen/margin_default_10dp"
-                    android:id="@+id/weather_wind_speed_layout"
-                    app:layout_constraintStart_toEndOf="@id/weather_min_temp_layout"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Wind speed"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/weather_wind_speed"
-                        tools:text="8.23"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_marginVertical="@dimen/margin_default_10dp"
-                    android:background="@color/material_grey100"
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"/>
-
-                <LinearLayout
-                    android:layout_marginHorizontal="@dimen/margin_default_10dp"
-                    android:id="@+id/weather_wind_humidity_layout"
-                    app:layout_constraintStart_toEndOf="@id/weather_wind_speed_layout"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:text="Humidity"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/weather_humidity"
-                        tools:text="8.23"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:id="@+id/weather_max_temp"
+                tools:text="23°"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
+        <View
+            android:layout_marginVertical="@dimen/margin_default_10dp"
+            android:background="@color/material_grey100"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/margin_default_10dp"
+            android:id="@+id/weather_min_temp_layout"
+            app:layout_constraintStart_toEndOf="@id/weather_max_temp_layout"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/min_temp_info_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:id="@+id/weather_min_temp"
+                tools:text="23°"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginVertical="@dimen/margin_default_10dp"
+            android:background="@color/material_grey100"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_default_10dp"
+            android:id="@+id/weather_wind_speed_layout"
+            app:layout_constraintStart_toEndOf="@id/weather_min_temp_layout"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/wind_speed_info_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/weather_wind_speed"
+                tools:text="8.23"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginVertical="@dimen/margin_default_10dp"
+            android:background="@color/material_grey100"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/margin_default_10dp"
+            android:id="@+id/weather_wind_humidity_layout"
+            app:layout_constraintStart_toEndOf="@id/weather_wind_speed_layout"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/humidity_info_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/weather_humidity"
+                tools:text="8.23"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

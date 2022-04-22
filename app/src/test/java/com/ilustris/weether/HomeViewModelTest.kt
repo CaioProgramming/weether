@@ -144,7 +144,7 @@ class HomeViewModelTest {
         homeViewModel.fetchCities()
 
         homeViewModel.homeState.observeForever {
-            assertEquals(it, HomeViewModel.HomeState.CityQuerryError("TestCity"))
+            assertEquals(it, HomeViewModel.HomeState.CityQueryError("TestCity"))
         }
     }
 

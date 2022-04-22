@@ -14,6 +14,4 @@ object LocalCities {
         "Praga",
         "Viena"
     )
-
-
 }

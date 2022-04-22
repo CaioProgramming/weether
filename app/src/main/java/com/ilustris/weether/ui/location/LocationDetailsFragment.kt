@@ -12,7 +12,7 @@ import com.ilustris.weether.ui.location.adapter.LocationPagerAdapter
 class LocationDetailsFragment : Fragment() {
 
     private val args by navArgs<LocationDetailsFragmentArgs>()
-    lateinit var locationWeatherFragmentBinding: LocationWeatherFragmentBinding
+    private lateinit var locationWeatherFragmentBinding: LocationWeatherFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

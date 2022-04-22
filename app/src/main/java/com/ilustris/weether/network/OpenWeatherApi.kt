@@ -22,5 +22,4 @@ interface OpenWeatherApi {
         @Query("units") unit : String = "metric",
         @Query("appid") key: String = BuildConfig.OPENWEATHER_KEY,
         ) : OpenWeatherResponse
-
 }

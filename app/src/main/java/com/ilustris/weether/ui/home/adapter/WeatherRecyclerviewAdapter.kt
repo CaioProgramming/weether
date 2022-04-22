@@ -59,11 +59,8 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
                     weatherStatus.setTextColor(textColor)
                     weatherDescription.setTextColor(textColor)
                 }
-
-
             }
         }
-
     }
 
     inner class CityWeatherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -93,7 +90,6 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
             }
             SECONDARYVIEW -> {
                 CityWeatherViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.weather_card, parent, false))
-
             }
            else -> {
                CityWeatherViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.weather_card, parent, false))
@@ -115,7 +111,6 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
             holder.itemView.startAnimation(slideIn)
         }
 
-
         when(holder) {
             is HighLightCityViewHolder ->  {
                 holder.bind()
@@ -127,6 +122,5 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
     }
 
     override fun getItemCount(): Int = citiesWeather.size
-
 
 }

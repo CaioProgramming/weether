@@ -3,7 +3,6 @@ package com.ilustris.weether.ui.home
 import android.Manifest
 import android.app.Application
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -23,7 +22,7 @@ class HomeViewModel(application: Application, private val useCase: WeatherUseCas
         data class LocalWeatherRetrieved(val cityData: CityData): HomeState()
         data class CitiesWeatherRetrieved(val cities: List<CityData>) : HomeState()
         data class FetchError(val message: String) : HomeState()
-        data class CityQuerryError(val message: String): HomeState()
+        data class CityQueryError(val message: String): HomeState()
         object RequestLocationPermission : HomeState()
         object RequestActualLocation : HomeState()
     }
@@ -38,7 +37,7 @@ class HomeViewModel(application: Application, private val useCase: WeatherUseCas
                     request.data.forEach {
                         when(val cityWeather = useCase.fetchCityWeather(it)) {
                             is Result.Error -> {
-                                homeState.postValue(HomeState.CityQuerryError("Error fetching $it weather"))
+                                homeState.postValue(HomeState.CityQueryError("Error fetching $it weather"))
                             }
                             is Result.Success -> {
                                 cities.add(cityWeather.data)

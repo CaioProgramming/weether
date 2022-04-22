@@ -16,5 +16,4 @@ abstract class ApiConfig(private val url: String) {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(url).build()
     }
-
 }
