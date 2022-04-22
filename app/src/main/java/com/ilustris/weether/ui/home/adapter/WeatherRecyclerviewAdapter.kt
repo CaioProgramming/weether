@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
@@ -22,17 +23,17 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
 
     fun updateCities(cityData: CityData) {
         citiesWeather.add(cityData)
-        notifyItemInserted(itemCount)
+        notifyDataSetChanged()
     }
 
     fun refreshCities(cities: List<CityData>) {
         citiesWeather.addAll(cities)
-        notifyItemRangeInserted(0, cities.size)
+        notifyDataSetChanged()
     }
 
     fun clearAdapter() {
         citiesWeather.clear()
-        notifyItemRangeRemoved(0,0)
+        notifyDataSetChanged()
     }
 
     inner class HighLightCityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -108,8 +109,12 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
         holder.itemView.setOnClickListener {
            onSelectCity(position)
         }
-        val slideIn = AnimationUtils.loadAnimation(holder.itemView.context, org.koin.android.R.anim.abc_slide_in_bottom)
-        holder.itemView.startAnimation(slideIn)
+        if (!holder.itemView.isVisible) {
+            holder.itemView.visibility = View.VISIBLE
+            val slideIn = AnimationUtils.loadAnimation(holder.itemView.context, org.koin.android.R.anim.abc_slide_in_bottom)
+            holder.itemView.startAnimation(slideIn)
+        }
+
 
         when(holder) {
             is HighLightCityViewHolder ->  {

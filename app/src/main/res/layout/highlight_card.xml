@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="15dp"
     android:layout_margin="10dp"
+    android:visibility="gone"
+    tools:visibility="visible"
     app:cardBackgroundColor="@color/material_blue500"
     app:cardElevation="0dp"
     android:layout_width="match_parent"
