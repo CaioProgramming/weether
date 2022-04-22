@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.ilustris.weether.databinding.LocationWeatherFragmentBinding
@@ -26,10 +27,11 @@ class LocationDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationWeatherFragmentBinding.locationsPager.run {
-           adapter = LocationPagerAdapter(args.cities.toList())
-            setCurrentItem(args.position, true)
+            adapter = LocationPagerAdapter(args.cities.toList())
+            postDelayed(500) {
+                setCurrentItem(args.position, true)
+            }
         }
-
     }
 
 
