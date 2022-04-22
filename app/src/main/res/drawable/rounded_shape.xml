@@ -14,7 +14,7 @@
         android:right="@dimen/padding_small_8dp"
         android:top="@dimen/padding_small_8dp" />
 
-    <solid android:color="@color/lwhite" />
-    <stroke android:color="?android:colorBackground" android:width="1dp"/>
+    <solid android:color="?android:colorBackground" />
+    <stroke android:color="?android:textColorHint" android:width="1dp"/>
 
 </shape>

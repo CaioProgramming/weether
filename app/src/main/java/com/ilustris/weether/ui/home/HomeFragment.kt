@@ -10,12 +10,9 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityOptionsCompat
 import androidx.core.os.bundleOf
-import androidx.core.util.Pair
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.ActivityNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest.PRIORITY_LOW_POWER
@@ -135,8 +132,8 @@ class HomeFragment : Fragment() {
                 .setMessage("To get your current location weather info please grant the permission for our app!")
                 .setNegativeButton(
                     "Cancel"
-                ) { dialog, which -> dialog?.dismiss() }
-                .setPositiveButton("Ok") { dialog, wich ->
+                ) { dialog, _ -> dialog?.dismiss() }
+                .setPositiveButton("Ok") { dialog, _ ->
                     locationPermissionRequest.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                     dialog.dismiss()
                 }

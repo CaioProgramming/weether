@@ -3,15 +3,8 @@ package com.ilustris.weether.ui.location.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
 import com.ilustris.weether.databinding.LocationPageBinding
@@ -25,11 +18,12 @@ class LocationPagerAdapter(val cities: List<CityData>) :
             LocationPageBinding.bind(itemView).run {
                 val cityData = cities[bindingAdapterPosition]
                 weatherLocation.text = cityData.name
-                weatherCurrentTemp.text = "${cityData.weatherData.temperature}°C"
-                weatherMaxTemp.text = "${cityData.weatherData.maxTemperature}°C"
-                weatherMinTemp.text = "${cityData.weatherData.minTemperature}°C"
+                weatherCurrentTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.temperature)
+                weatherMaxTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.maxTemperature)
+                weatherMinTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.minTemperature)
                 weatherHumidity.text = "${cityData.weatherData.humidity}%"
-                weatherWindSpeed.text = "${cityData.weatherData.windSpeed} mph"
+                weatherWindSpeed.text = itemView.context.getString(R.string.wind_placeholder, cityData.weatherData.windSpeed)
+
                 weatherDescription.text = cityData.weatherData.description
                 cityData.weatherData.weatherType?.let {
                     val textColor = ContextCompat.getColor(itemView.context, it.textColor)
@@ -38,10 +32,6 @@ class LocationPagerAdapter(val cities: List<CityData>) :
                     weatherCurrentTemp.setTextColor(textColor)
                     weatherDescription.setTextColor(textColor)
                     weatherLocation.setTextColor(textColor)
-                    /*weatherMaxTemp.setTextColor(textColor)
-                    weatherMinTemp.setTextColor(textColor)
-                    weatherHumidity.setTextColor(textColor)
-                    weatherWindSpeed.setTextColor(textColor)*/
                     itemView.setBackgroundColor(backColor)
                 }
             }

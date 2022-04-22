@@ -38,7 +38,7 @@ class WeatherMapper {
         DRIZZLE(3, "https://assets7.lottiefiles.com/temp/lf20_rpC1Rd.json", com.github.mcginty.R.color.material_grey200, R.color.black),
         RAIN(5, "https://assets7.lottiefiles.com/packages/lf20_yvyo106d.json", com.github.mcginty.R.color.material_bluegrey400, R.color.white),
         SNOW(6, "https://assets4.lottiefiles.com/private_files/lf30_w5u9xr3a.json", com.github.mcginty.R.color.material_blue200, R.color.white),
-        ATMOSPHERE(7, "https://assets7.lottiefiles.com/private_files/lf30_iugenddu.json", com.github.mcginty.R.color.material_blueA400, R.color.white),
+        ATMOSPHERE(7, "https://assets7.lottiefiles.com/private_files/lf30_iugenddu.json", com.github.mcginty.R.color.material_deeppurpleA400, R.color.white),
         CLEAR(8, "https://assets4.lottiefiles.com/private_files/lf30_moaf5wp5.json", com.github.mcginty.R.color.material_blue500, R.color.white),
         CLOUDS(80, "https://assets4.lottiefiles.com/private_files/lf30_j1g2rpsv.json", com.github.mcginty.R.color.material_grey100, R.color.black)
     }

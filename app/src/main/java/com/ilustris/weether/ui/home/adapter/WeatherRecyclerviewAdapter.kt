@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
@@ -40,11 +41,11 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
         fun bind() {
             HighlightCardBinding.bind(itemView).run {
                 val city = citiesWeather[bindingAdapterPosition]
-                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}")
+                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}", HtmlCompat.FROM_HTML_MODE_LEGACY)
                 weatherDescription.text = city.weatherData.description
                 weatherStatus.text = city.weatherData.title
-                temp.text = "${city.weatherData.temperature}°C"
-                tempFeels.text = "Feels like ${city.weatherData.temperatureFeels}°C"
+                temp.text = itemView.context.getString(R.string.temperature_placeholder, city.weatherData.temperature)
+                tempFeels.text = itemView.context.getString(R.string.temperature_feel_placeholder, city.weatherData.temperatureFeels)
                 city.weatherData.weatherType?.let {
                     weatherIcon.setAnimationFromUrl(it.animationUrl)
                     weatherIcon.playAnimation()
@@ -68,8 +69,8 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
         fun bind() {
             WeatherCardBinding.bind(itemView).run {
                 val city = citiesWeather[bindingAdapterPosition]
-                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}")
-                temp.text = "${city.weatherData.temperature}°C"
+                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}", HtmlCompat.FROM_HTML_MODE_LEGACY)
+                temp.text = itemView.context.getString(R.string.temperature_placeholder, city.weatherData.temperature)
                 weatherDescription.text = city.weatherData.description
                 city.weatherData.weatherType?.let {
                     val textColor = ContextCompat.getColor(itemView.context, it.textColor)

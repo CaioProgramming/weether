@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Weether" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="android:fontFamily">@font/alata</item>
         <item name="fontFamily">@font/alata</item>
         <item name="colorPrimary">@color/material_blue200</item>
         <item name="colorPrimaryVariant">@color/material_blue700</item>
