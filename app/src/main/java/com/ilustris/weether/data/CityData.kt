@@ -17,5 +17,5 @@ data class WeatherData(
     val minTemperature: Int,
     val windSpeed: Double,
     val humidity: Int,
-    val weatherType: WeatherMapper.WeatherTypes?
+    val weatherType: WeatherMapper.WeatherType?
 ) : Parcelable

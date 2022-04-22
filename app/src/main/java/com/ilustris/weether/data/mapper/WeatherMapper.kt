@@ -28,12 +28,12 @@ class WeatherMapper {
         getWeatherType(this)
     )
 
-    private fun getWeatherType(weatherInfo: Weather): WeatherTypes? {
+    private fun getWeatherType(weatherInfo: Weather): WeatherType? {
         val requiredId : String = if (weatherInfo.main == "Clouds") "80" else weatherInfo.id.toString()[0].toString()
-        return  WeatherTypes.values().find { it.id == requiredId.toInt() }
+        return  WeatherType.values().find { it.id == requiredId.toInt() }
     }
 
-    enum class WeatherTypes(val id: Int, val animationUrl: String = "", val backColor: Int, val textColor: Int) {
+    enum class WeatherType(val id: Int, val animationUrl: String = "", val backColor: Int, val textColor: Int) {
         THUNDERSTORM(2, "https://assets7.lottiefiles.com/temp/lf20_XkF78Y.json", com.github.mcginty.R.color.material_grey700, R.color.white),
         DRIZZLE(3, "https://assets7.lottiefiles.com/temp/lf20_rpC1Rd.json", com.github.mcginty.R.color.material_grey200, R.color.black),
         RAIN(5, "https://assets7.lottiefiles.com/packages/lf20_yvyo106d.json", com.github.mcginty.R.color.material_bluegrey400, R.color.white),
