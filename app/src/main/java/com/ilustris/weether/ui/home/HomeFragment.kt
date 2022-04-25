@@ -22,6 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
+import com.ilustris.weether.data.UNKNOWN_LOCATION
 import com.ilustris.weether.databinding.HomeFragmentBinding
 import com.ilustris.weether.ui.home.adapter.WeatherRecyclerviewAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,9 +37,16 @@ class HomeFragment : Fragment() {
     private lateinit var locationPermissionRequest: ActivityResultLauncher<String>
 
     private fun selectCity(index: Int) {
-        val bundle = bundleOf("position" to index, "cities" to weatherAdapter.citiesWeather.toTypedArray())
-        findNavController().navigate(R.id.action_homeFragment_to_locationDetailsFragment, bundle)
-        weatherAdapter.clearAdapter()
+
+        val city = weatherAdapter.citiesWeather[index]
+        if (city.name == UNKNOWN_LOCATION) {
+            requestLocationPermission()
+        } else {
+            val bundle = bundleOf("position" to index, "cities" to weatherAdapter.citiesWeather.toTypedArray())
+            findNavController().navigate(R.id.action_homeFragment_to_locationDetailsFragment, bundle)
+            weatherAdapter.clearAdapter()
+        }
+
     }
 
     private val locationClient: FusedLocationProviderClient by lazy {
@@ -55,9 +63,12 @@ class HomeFragment : Fragment() {
         locationPermissionRequest =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                 if (isGranted) {
+                    weatherAdapter.clearAdapter()
                     fetchLocationWeather()
                 } else {
-                    showError("Current location unavailable")
+                    weatherAdapter.updateCities(CityData(name = UNKNOWN_LOCATION))
+                    homeBinding?.showRecycler()
+                    homeViewModel.fetchCities()
                 }
             }
         homeBinding = HomeFragmentBinding.inflate(inflater)
@@ -112,18 +123,22 @@ class HomeFragment : Fragment() {
         weatherAdapter.updateCities(cityData)
         homeBinding?.run {
             if (!weatherRecycler.isVisible) {
-                weatherRecycler.visibility = View.VISIBLE
-                val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
-                weatherRecycler.startAnimation(fadeIn)
-                val fadeOut = AnimationUtils.loadAnimation(
-                    requireContext(),
-                    com.airbnb.lottie.R.anim.abc_fade_out
-                )
-                loadingAnimation.startAnimation(fadeOut)
-                loadingAnimation.cancelAnimation()
-                loadingAnimation.visibility = View.GONE
+                showRecycler()
             }
         }
+    }
+
+    private fun  HomeFragmentBinding.showRecycler() {
+        weatherRecycler.visibility = View.VISIBLE
+        val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
+        weatherRecycler.startAnimation(fadeIn)
+        val fadeOut = AnimationUtils.loadAnimation(
+            requireContext(),
+            com.airbnb.lottie.R.anim.abc_fade_out
+        )
+        loadingAnimation.startAnimation(fadeOut)
+        loadingAnimation.cancelAnimation()
+        loadingAnimation.visibility = View.GONE
     }
 
     private fun requestLocationPermission() {

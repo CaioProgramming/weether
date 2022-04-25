@@ -11,14 +11,18 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.ilustris.weether.R
 import com.ilustris.weether.data.CityData
+import com.ilustris.weether.data.UNKNOWN_LOCATION
 import com.ilustris.weether.databinding.HighlightCardBinding
 import com.ilustris.weether.databinding.WeatherCardBinding
 
 private const val HIGHLIGHTVIEW = 0
 private const val SECONDARYVIEW = 1
+private const val UNKNOWN = 2
 
-class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayList(),val onSelectCity: (Int) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class WeatherRecyclerviewAdapter(
+    val citiesWeather: ArrayList<CityData> = ArrayList(),
+    val onSelectCity: (Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     fun updateCities(cityData: CityData) {
@@ -36,18 +40,30 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
         notifyDataSetChanged()
     }
 
-    inner class HighLightCityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UnknownLocationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    }
+
+    inner class HighLightCityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind() {
             HighlightCardBinding.bind(itemView).run {
                 val city = citiesWeather[bindingAdapterPosition]
-                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                weatherDescription.text = city.weatherData.description
-                weatherStatus.text = city.weatherData.title
-                temp.text = itemView.context.getString(R.string.temperature_placeholder, city.weatherData.temperature)
-                tempFeels.text = itemView.context.getString(R.string.temperature_feel_placeholder, city.weatherData.temperatureFeels)
-                city.weatherData.weatherType?.let {
+                weatherLocation.text = Html.fromHtml(
+                    "<b>${city.name}</b>, ${city.country}",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+                weatherDescription.text = city.weatherData?.description
+                weatherStatus.text = city.weatherData?.title
+                temp.text = itemView.context.getString(
+                    R.string.temperature_placeholder,
+                    city.weatherData?.temperature
+                )
+                tempFeels.text = itemView.context.getString(
+                    R.string.temperature_feel_placeholder,
+                    city.weatherData?.temperatureFeels
+                )
+                city.weatherData?.weatherType?.let {
                     weatherIcon.setAnimationFromUrl(it.animationUrl)
                     weatherIcon.playAnimation()
                     val textColor = ContextCompat.getColor(itemView.context, it.textColor)
@@ -67,10 +83,16 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
         fun bind() {
             WeatherCardBinding.bind(itemView).run {
                 val city = citiesWeather[bindingAdapterPosition]
-                weatherLocation.text = Html.fromHtml("<b>${city.name}</b>, ${city.country}", HtmlCompat.FROM_HTML_MODE_LEGACY)
-                temp.text = itemView.context.getString(R.string.temperature_placeholder, city.weatherData.temperature)
-                weatherDescription.text = city.weatherData.description
-                city.weatherData.weatherType?.let {
+                weatherLocation.text = Html.fromHtml(
+                    "<b>${city.name}</b>, ${city.country}",
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+                temp.text = itemView.context.getString(
+                    R.string.temperature_placeholder,
+                    city.weatherData?.temperature
+                )
+                weatherDescription.text = city.weatherData?.description
+                city.weatherData?.weatherType?.let {
                     val textColor = ContextCompat.getColor(itemView.context, it.textColor)
                     val backColor = ContextCompat.getColor(itemView.context, it.backColor)
                     weatherIcon.setAnimationFromUrl(it.animationUrl)
@@ -84,35 +106,57 @@ class WeatherRecyclerviewAdapter(val citiesWeather: ArrayList<CityData> = ArrayL
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       return when(viewType) {
+        return when (viewType) {
             HIGHLIGHTVIEW -> {
-                HighLightCityViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.highlight_card, parent, false))
+                HighLightCityViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.highlight_card, parent, false)
+                )
             }
             SECONDARYVIEW -> {
-                CityWeatherViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.weather_card, parent, false))
+                CityWeatherViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.weather_card, parent, false)
+                )
             }
-           else -> {
-               CityWeatherViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.weather_card, parent, false))
-           }
+            else -> {
+                UnknownLocationHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.unknown_location_card, parent, false)
+                )
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-       return if (position == 0) HIGHLIGHTVIEW else SECONDARYVIEW
+        return when {
+            citiesWeather[position].name == UNKNOWN_LOCATION -> {
+                UNKNOWN
+            }
+            position == 0 -> {
+                HIGHLIGHTVIEW
+            }
+            else -> {
+                SECONDARYVIEW
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-           onSelectCity(position)
+            onSelectCity(position)
         }
         if (!holder.itemView.isVisible) {
             holder.itemView.visibility = View.VISIBLE
-            val slideIn = AnimationUtils.loadAnimation(holder.itemView.context, org.koin.android.R.anim.abc_slide_in_bottom)
+            val slideIn = AnimationUtils.loadAnimation(
+                holder.itemView.context,
+                org.koin.android.R.anim.abc_slide_in_bottom
+            )
             holder.itemView.startAnimation(slideIn)
         }
 
-        when(holder) {
-            is HighLightCityViewHolder ->  {
+        when (holder) {
+            is HighLightCityViewHolder -> {
                 holder.bind()
             }
             is CityWeatherViewHolder -> {

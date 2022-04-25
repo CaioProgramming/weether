@@ -5,7 +5,9 @@ import com.ilustris.weether.data.mapper.WeatherMapper
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CityData(val name: String, val country: String, val weatherData: WeatherData) : Parcelable
+data class CityData(val name: String = "", val country: String = "", val weatherData: WeatherData? = null) : Parcelable
+
+const val UNKNOWN_LOCATION = "UNKNOWN"
 
 @Parcelize
 data class WeatherData(

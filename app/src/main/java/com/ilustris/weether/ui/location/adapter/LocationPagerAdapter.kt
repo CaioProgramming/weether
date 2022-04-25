@@ -18,14 +18,14 @@ class LocationPagerAdapter(val cities: List<CityData>) :
             LocationPageBinding.bind(itemView).run {
                 val cityData = cities[bindingAdapterPosition]
                 weatherLocation.text = cityData.name
-                weatherCurrentTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.temperature)
-                weatherMaxTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.maxTemperature)
-                weatherMinTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData.minTemperature)
-                weatherHumidity.text = "${cityData.weatherData.humidity}%"
-                weatherWindSpeed.text = itemView.context.getString(R.string.wind_placeholder, cityData.weatherData.windSpeed)
+                weatherCurrentTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData?.temperature)
+                weatherMaxTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData?.maxTemperature)
+                weatherMinTemp.text = itemView.context.getString(R.string.temperature_placeholder, cityData.weatherData?.minTemperature)
+                weatherHumidity.text = "${cityData.weatherData?.humidity}%"
+                weatherWindSpeed.text = itemView.context.getString(R.string.wind_placeholder, cityData.weatherData?.windSpeed)
 
-                weatherDescription.text = cityData.weatherData.description
-                cityData.weatherData.weatherType?.let { extractWeatherStyle(it) }
+                weatherDescription.text = cityData.weatherData?.description
+                cityData.weatherData?.weatherType?.let { extractWeatherStyle(it) }
             }
         }
 

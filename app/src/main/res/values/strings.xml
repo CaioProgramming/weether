@@ -8,4 +8,5 @@
     <string name="min_temp_info_title">Min</string>
     <string name="wind_speed_info_title">Wind speed</string>
     <string name="humidity_info_title">Humidity</string>
+    <string name="no_location_animation_url">https://assets4.lottiefiles.com/packages/lf20_oqgbsnpl.json</string>
 </resources>
